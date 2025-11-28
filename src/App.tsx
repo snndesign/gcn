@@ -7,7 +7,7 @@ import PlanCard from './components/PlanCard';
 import ComparisonTable from './components/ComparisonTable';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
-import AiAdvisor from './components/AiAdvisor';
+//import AiAdvisor from './components/AiAdvisor';
 import { ThemeProvider } from './components/ThemeContext';
 import { ContentProvider, useContent } from './context/ContentContext';
 import AdminPanel from './components/AdminPanel';
@@ -115,7 +115,7 @@ function AppContent({ initialPage: propInitialPage }: AppProps) {
       <AlertBanner />
       {renderContent()}
       <Footer />
-      <AiAdvisor />
+      //<AiAdvisor />
       <AdminPanel />
     </div>
   );
