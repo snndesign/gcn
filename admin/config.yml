@@ -1,0 +1,53 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true          # для локального тестирования
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "pages"
+    label: "Страницы сайта"
+    folder: "src/data/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "ID (не менять)", name: "id", widget: "hidden", default: "{{slug}}" }
+      - { label: "Заголовок страницы", name: "title", widget: "string" }
+      - { label: "Содержимое (Markdown)", name: "content", widget: "markdown" }
+
+  - name: "tariffs"
+    label: "Тарифы"
+    file: "src/data/tariffs.json"
+    fields:
+      - { label: "Тарифы", name: "plans", widget: "list", fields:
+          - { label: "Название", name: "name", widget: "string" }
+          - { label: "Скорость", name: "speed", widget: "string" }
+          - { label: "Цена", name: "price", widget: "string" }
+          - { label: "Популярный", name: "popular", widget: "boolean", default: false }
+          - { label: "Особенности", name: "features", widget: "list" }
+        }
+
+  - name: "iptv"
+    label: "IPTV"
+    file: "src/data/iptv.json"
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Описание", name: "description", widget: "text" }
+      - { label: "Картинка", name: "image", widget: "image", required: false }
+
+  - name: "wifi"
+    label: "Покрытие Wi-Fi"
+    file: "src/data/wifi.json"
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Текст", name: "text", widget: "markdown" }
+
+  - name: "site"
+    label: "Общие настройки"
+    file: "src/data/site.json"
+    fields:
+      - { label: "Название компании", name: "company", widget: "string", default: "GCN Fiber" }
+      - { label: "Телефон", name: "phone", widget: "string" }
+      - { label: "Email", name: "email", widget: "string" }

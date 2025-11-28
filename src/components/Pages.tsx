@@ -13,16 +13,15 @@ interface PageLayoutProps {
 
 // Helper hook to get content for a specific page
 const usePageContent = (pageId: string) => {
-  const { content } = useContent();
-  const page = content.pages?.find(p => p.id === pageId);
+  const page = require(`../data/pages/${pageId}.json`);
   
   const getBlock = (blockId: string) => {
-    return page?.blocks.find(b => b.id === blockId)?.value || '';
+    return page.blocks?.[blockId] || '';
   };
-  
-  return { 
-    title: page?.title || '',
-    getBlock 
+
+  return {
+    title: page.title || '',
+    getBlock
   };
 };
 
