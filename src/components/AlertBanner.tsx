@@ -1,0 +1,67 @@
+import React from 'react';
+import { useContent } from '../context/ContentContext';
+import { AlertTriangle, Info, Bell } from 'lucide-react';
+
+const AlertBanner: React.FC = () => {
+  const { content } = useContent();
+  const { alertConfig } = content;
+  
+  if (!alertConfig?.isActive) return null;
+
+  const getVariantStyles = () => {
+    switch (alertConfig.variant) {
+      case 'critical':
+        return {
+          container: 'bg-red-600 border-red-700 text-white',
+          icon: <AlertTriangle size={20} className="animate-pulse" />,
+          title: 'Увага!'
+        };
+      case 'warning':
+        return {
+          container: 'bg-amber-500 border-amber-600 text-slate-900',
+          icon: <Bell size={20} />,
+          title: 'Важливо:'
+        };
+      case 'info':
+      default:
+        return {
+          container: 'bg-brand-600 border-brand-700 text-white',
+          icon: <Info size={20} />,
+          title: 'Інформація:'
+        };
+    }
+  };
+
+  const styles = getVariantStyles();
+
+  return (
+    <div className={`fixed top-[85px] md:top-[110px] left-0 w-full z-40 px-4 md:px-8 pointer-events-none`}>
+      <div className={`
+        pointer-events-auto max-w-4xl mx-auto rounded-xl shadow-lg border-b-4 
+        ${styles.container} 
+        flex items-start gap-4 p-4 md:py-3 transition-all duration-500 animate-in slide-in-from-top-2
+      `}>
+        <div className="flex-shrink-0 mt-0.5 p-1 bg-white/20 rounded-full">
+            {styles.icon}
+        </div>
+        {/* Added whitespace-pre-line to respect newlines from textarea */}
+        <div className="flex-1 text-sm md:text-base font-medium leading-relaxed whitespace-pre-line">
+          <span className="font-bold uppercase tracking-wide opacity-90 mr-2">{styles.title}</span>
+          {alertConfig.message}
+        </div>
+        
+        {/* Optional Link Button if configured */}
+        {alertConfig.linkUrl && (
+             <a 
+                href={alertConfig.linkUrl} 
+                className="hidden md:inline-block mt-0.5 px-4 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-bold transition-colors whitespace-nowrap self-start"
+             >
+                {alertConfig.linkText || "Детальніше"}
+             </a>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default AlertBanner;

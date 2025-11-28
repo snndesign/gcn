@@ -1,0 +1,22 @@
+// vite.config.ts — добавь эту строку в build:
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        private: path.resolve(__dirname, 'private.html'),
+        business: path.resolve(__dirname, 'business.html'),
+        contract: path.resolve(__dirname, 'contract.html'),
+        payment: path.resolve(__dirname, 'payment.html'),
+        wifi: path.resolve(__dirname, 'wifi.html'),
+        quality: path.resolve(__dirname, 'quality.html'),
+        iptv: path.resolve(__dirname, 'iptv.html'),
+      }
+    },
+    // ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+    // Добавь эту строку — и больше никогда не будет ошибки с хэшами!
+    manifest: true
+    // ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+  }
+})
