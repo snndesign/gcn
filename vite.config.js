@@ -1,9 +1,8 @@
-// vite.config.js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+const { defineConfig } = require('vite')
+const react = require('@vitejs/plugin-react')
+const path = require('path')
 
-export default defineConfig({
+module.exports = defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
@@ -17,6 +16,8 @@ export default defineConfig({
         quality: path.resolve(__dirname, 'quality.html'),
         iptv: path.resolve(__dirname, 'iptv.html'),
       }
-    }
+    },
+    outDir: 'dist',
+    assetsDir: 'assets'
   }
 })
