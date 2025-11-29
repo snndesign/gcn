@@ -30,7 +30,8 @@ function AppContent({ initialPage: propInitialPage }: AppProps) {
   const { plans, benefits } = content;
 
   // Ключевая строчка — теперь берёт страницу из HTML
-  const [currentPage, setCurrentPage] = useState(propInitialPage || 'home');
+ export default function App({ initialPage = 'home' }: { initialPage?: string }) {
+  const [currentPage, setCurrentPage] = useState(initialPage);
 
   const handlePlanSelect = (plan: Plan) => {
     alert(`Ви обрали тариф: ${plan.name}. Дякуємо!`);

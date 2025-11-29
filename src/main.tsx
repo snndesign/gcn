@@ -4,18 +4,12 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Определяем, какой HTML-файл нас загрузил
-const currentPage = document.documentElement.dataset.page ||
-  (location.pathname.includes('private') ? 'private-clients' :
-   location.pathname.includes('business') ? 'business-clients' :
-   location.pathname.includes('contract') ? 'contract' :
-   location.pathname.includes('payment') ? 'payment' :
-   location.pathname.includes('wifi') ? 'wifi' :
-   location.pathname.includes('quality') ? 'quality' :
-   location.pathname.includes('iptv') ? 'iptv' : 'home')
+// ЧИТАЕМ data-page ИЗ HTML!!!
+const rootElement = document.getElementById('root')
+const initialPage = rootElement?.dataset.page || 'home'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(rootElement!).render(
   <React.StrictMode>
-    <App initialPage={currentPage} />
+    <App initialPage={initialPage} />
   </React.StrictMode>
 )
